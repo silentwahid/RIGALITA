@@ -1,927 +1,136 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rigalita - Marque de Vêtements Premium</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --bg: #faf6f3;
-            --accent: #58162b; /* bordeaux profond */
-            --gold: #c69b46;
-            --muted: #8b7a78;
-            --card-bg: rgba(255,255,255,0.85);
-            --glass: rgba(255,255,255,0.6);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg);
-            color: var(--accent);
-            overflow-x: hidden;
-        }
-
-        /* En-tête & Navigation */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 1.5rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-
-        header.scrolled {
-            background-color: var(--glass);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            padding: 1rem 5%;
-        }
-
-        .logo {
-            font-size: 2.2rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            color: var(--accent);
-            text-decoration: none;
-            position: relative;
-        }
-
-        .logo::after {
-            content: "";
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--gold);
-            transition: width 0.3s ease;
-        }
-
-        .logo:hover::after {
-            width: 100%;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
-        }
-
-        nav ul li a {
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        nav ul li a::after {
-            content: "";
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--gold);
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover {
-            color: var(--gold);
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .hamburger {
-            display: none;
-            cursor: pointer;
-            font-size: 1.5rem;
-            color: var(--accent);
-        }
-
-                /* Section Hero Améliorée */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(135deg, var(--bg) 0%, #f0e9e2 100%);
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://images.unsplash.com/photo-1660743426419-d1aa5703f80b?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=696') center/cover no-repeat;
-            opacity: 0.15;
-            z-index: 1;
-        }
-
-        .hero-content {
-            text-align: center;
-            z-index: 2;
-            max-width: 900px;
-            padding: 0 2rem;
-            position: relative;
-        }
-
-        .hero-title {
-            font-size: 5rem;
-            margin-bottom: 1.5rem;
-            font-weight: 700;
-            letter-spacing: 4px;
-            color: var(--accent);
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-            line-height: 1.1;
-            position: relative;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s ease forwards 0.5s;
-        }
-
-        .hero-title::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 120px;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
-        }
-
-        .hero-subtitle {
-            font-size: 1.4rem;
-            margin-bottom: 2.5rem;
-            color: var(--muted);
-            line-height: 1.6;
-            font-weight: 300;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s ease forwards 0.8s;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            background-color: var(--accent);
-            color: white;
-            border: none;
-            border-radius: 30px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.4s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            font-size: 1.1rem;
-            letter-spacing: 1px;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s ease forwards 1.1s;
-            box-shadow: 0 5px 15px rgba(88, 22, 43, 0.3);
-        }
-
-        .btn:hover {
-            background-color: var(--gold);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 25px rgba(198, 155, 70, 0.4);
-        }
-
-        .btn::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 5px;
-            height: 5px;
-            background: rgba(255, 255, 255, 0.5);
-            opacity: 0;
-            border-radius: 100%;
-            transform: scale(1, 1) translate(-50%);
-            transform-origin: 50% 50%;
-        }
-
-        .btn:focus:not(:active)::after {
-            animation: ripple 1s ease-out;
-        }
-
-        .hero-image {
-            position: absolute;
-            width: 300px;
-            height: 450px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-            z-index: 1;
-            opacity: 0;
-            transition: transform 0.5s ease, opacity 0.5s ease;
-        }
-
-        .hero-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .hero-image-1 {
-            top: 15%;
-            left: 8%;
-            transform: rotate(-5deg);
-            animation: slideInLeft 1s ease forwards 1.4s;
-        }
-
-        .hero-image-2 {
-            bottom: 15%;
-            right: 8%;
-            transform: rotate(5deg);
-            animation: slideInRight 1s ease forwards 1.4s;
-        }
-
-        .hero-image:hover {
-            transform: rotate(0deg) scale(1.05);
-            z-index: 3;
-        }
-
-        .floating-elements {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 0;
-        }
-
-        .floating-element {
-            position: absolute;
-            background: var(--gold);
-            opacity: 0.1;
-            border-radius: 50%;
-        }
-
-        .floating-element:nth-child(1) {
-            width: 80px;
-            height: 80px;
-            top: 20%;
-            left: 10%;
-            animation: float 8s ease-in-out infinite;
-        }
-
-        .floating-element:nth-child(2) {
-            width: 120px;
-            height: 120px;
-            bottom: 15%;
-            right: 15%;
-            animation: float 10s ease-in-out infinite 1s;
-        }
-
-        .floating-element:nth-child(3) {
-            width: 60px;
-            height: 60px;
-            top: 60%;
-            left: 20%;
-            animation: float 7s ease-in-out infinite 0.5s;
-        }
-
-        .scroll-indicator {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: var(--muted);
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            opacity: 0;
-            animation: fadeIn 1s ease forwards 2s;
-            z-index: 2;
-        }
-
-        .scroll-indicator::after {
-            content: '';
-            width: 1px;
-            height: 40px;
-            background: var(--muted);
-            margin-top: 10px;
-            animation: scrollBounce 2s infinite;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideInLeft {
-            to {
-                opacity: 1;
-                transform: translateX(0) rotate(-5deg);
-            }
-            from {
-                opacity: 0;
-                transform: translateX(-100px) rotate(-5deg);
-            }
-        }
-
-        @keyframes slideInRight {
-            to {
-                opacity: 1;
-                transform: translateX(0) rotate(5deg);
-            }
-            from {
-                opacity: 0;
-                transform: translateX(100px) rotate(5deg);
-            }
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0) rotate(0deg);
-            }
-            50% {
-                transform: translateY(-20px) rotate(180deg);
-            }
-        }
-
-        @keyframes scrollBounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(10px);
-            }
-        }
-
-        @keyframes ripple {
-            0% {
-                transform: scale(0, 0);
-                opacity: 0.5;
-            }
-            100% {
-                transform: scale(20, 20);
-                opacity: 0;
-            }
-        }
-
-        /* Design Responsive */
-        @media (max-width: 1200px) {
-            .hero-title {
-                font-size: 4rem;
-            }
-            
-            .hero-image {
-                width: 250px;
-                height: 375px;
-            }
-        }
-
-        @media (max-width: 992px) {
-            .hero-title {
-                font-size: 3.5rem;
-            }
-            
-            .hero-image {
-                width: 200px;
-                height: 300px;
-            }
-            
-            .hero-image-1 {
-                left: 5%;
-            }
-            
-            .hero-image-2 {
-                right: 5%;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.8rem;
-            }
-            
-            .hero-subtitle {
-                font-size: 1.2rem;
-            }
-            
-            .hero-image {
-                display: none;
-            }
-            
-            .floating-element {
-                display: none;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .hero-title {
-                font-size: 2.2rem;
-                letter-spacing: 2px;
-            }
-            
-            .hero-subtitle {
-                font-size: 1rem;
-            }
-            
-            .btn {
-                padding: 0.8rem 2rem;
-                font-size: 1rem;
-            }
-        }
-
-        .btn::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 5px;
-            height: 5px;
-            background: rgba(255, 255, 255, 0.5);
-            opacity: 0;
-            border-radius: 100%;
-            transform: scale(1, 1) translate(-50%);
-            transform-origin: 50% 50%;
-        }
-
-        .btn:focus:not(:active)::after {
-            animation: ripple 1s ease-out;
-        }
-
-        /* Section À Propos */
-        .about {
-            padding: 8rem 5%;
-            background-color: white;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 4rem;
-            position: relative;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--accent);
-            display: inline-block;
-            position: relative;
-        }
-
-        .section-title h2::after {
-            content: "";
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background-color: var(--gold);
-        }
-
-        .about-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 4rem;
-        }
-
-        .about-text {
-            flex: 1;
-            opacity: 0;
-            transform: translateX(-30px);
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--accent);
-        }
-
-        .about-text p {
-            color: var(--muted);
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-        }
-
-        .about-image {
-            flex: 1;
-            opacity: 0;
-            transform: translateX(30px);
-        }
-
-        .about-image img {
-            width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Produits en Vedette */
-        .featured {
-            padding: 8rem 5%;
-            background-color: var(--bg);
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .product-card {
-            background-color: var(--card-bg);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .product-image {
-            height: 300px;
-            overflow: hidden;
-        }
-
-        .product-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .product-card:hover .product-image img {
-            transform: scale(1.05);
-        }
-
-        .product-info {
-            padding: 1.5rem;
-        }
-
-        .product-info h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            color: var(--accent);
-        }
-
-        .product-info p {
-            color: var(--muted);
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-        }
-
-        .product-price {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .price {
-            font-weight: 700;
-            color: var(--gold);
-            font-size: 1.2rem;
-        }
-
-        /* Pied de page */
-        footer {
-            background-color: var(--accent);
-            color: white;
-            padding: 4rem 5% 2rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .footer-column h3::after {
-            content: "";
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--gold);
-        }
-
-        .footer-column p {
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--gold);
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .social-icons a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-            transition: all 0.3s ease;
-        }
-
-        .social-icons a:hover {
-            background-color: var(--gold);
-            transform: translateY(-3px);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInLeft {
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes fadeInRight {
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes ripple {
-            0% {
-                transform: scale(0, 0);
-                opacity: 0.5;
-            }
-            100% {
-                transform: scale(20, 20);
-                opacity: 0;
-            }
-        }
-
-        /* Design Responsive */
-        @media (max-width: 992px) {
-            .hero h1 {
-                font-size: 3rem;
-            }
-
-            .about-content {
-                flex-direction: column;
-            }
-
-            .about-text, .about-image {
-                width: 100%;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hamburger {
-                display: block;
-            }
-
-            nav {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 70%;
-                height: 100vh;
-                background-color: var(--glass);
-                backdrop-filter: blur(10px);
-                transition: right 0.5s ease;
-                z-index: 999;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            nav.active {
-                right: 0;
-            }
-
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            nav ul li {
-                margin: 1.5rem 0;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .section-title h2 {
-                font-size: 2rem;
-            }
-
-            .products-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- En-tête -->
-    <header>
-        <a href="#" class="logo"><img style="width: 25%;" src="logo.png" alt=""></a>
-        <div class="hamburger">
-            <i class="fas fa-bars"></i>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#">Accueil</a></li>
-                <li><a href="#">Collections</a></li>
-                <li><a href="#">À Propos</a></li>
-                <li><a href="#">Boutique</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
 
-     <section class="hero">
-        <div class="floating-elements">
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
-        </div>
-        
-        <div class="hero-image hero-image-1">
-            <img src="01.jpg" alt="Collection Rigalita">
-        </div>
-        
-        <div class="hero-image hero-image-2">
-            <img src="02.jpg" alt="Collection Rigalita">
-        </div>
-        
-        <div class="hero-content">
-            <h1 class="hero-title">L'ÉLÉGANCE<br>REDÉFINIE</h1>
-            <p class="hero-subtitle">Découvrez notre collection exclusive de vêtements premium qui allie l'élégance intemporelle au style contemporain. Conçue avec précision et passion pour l'individu moderne.</p>
-            <a href="#" class="btn">Explorer la Collection</a>
-        </div>
-        
-        <div class="scroll-indicator">
-            Défiler
-        </div>
-    </section>
+  <!-- Top Banner -->
+  <div class="top-banner">
+    <span class="spp">AUTUMN COLLECTION DROP IN : <div id="countdown">03D : 14H : 20M : 08S</div></span>
+    
+    <span class="sp">livraison gratuite 58 willaya </span>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="logo.png" alt="Rigalita Logo">
+    </div>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Collection</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="overlay"></div>
+    <img src="bg.jpg" alt="Urban Casual Fashion" class="hero-bg">
+    <div class="hero-content">
+      <h1>DRESS WITH CLASS</h1>
+      <p>Autumn Sale (50% Off)</p>
+      <a href="#" class="btn">SHOP NOW</a>
+    </div>
+  </section>
 
 
 
-    <!-- Section À Propos -->
-    <section class="about">
-        <div class="section-title">
-            <h2>À Propos de Rigalita</h2>
-        </div>
-        <div class="about-content">
-            <div class="about-text">
-                <h3>Notre Histoire</h3>
-                <p>Fondée avec la vision de redéfinir la mode de luxe, Rigalita réunit un savoir-faire exceptionnel et un design innovant. Chaque pièce de notre collection raconte une histoire d'élégance, de sophistication et de beauté intemporelle.</p>
-                <p>Nous croyons que la mode est plus qu'un simple vêtement - c'est une expression de l'individualité, de la confiance et du style personnel. Nos créations sont conçues pour vous permettre d'embrasser votre identité unique.</p>
-                <a href="#" class="btn">En Savoir Plus</a>
-            </div>
-            <div class="about-image">
-                <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Marque Rigalita">
-            </div>
-        </div>
-    </section>
 
-    <!-- Produits en Vedette -->
-    <section class="featured">
-        <div class="section-title">
-            <h2>Collection en Vedette</h2>
-        </div>
-        <div class="products-grid">
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="01.jpg" alt="Robe Élégante">
-                </div>
-                <div class="product-info">
-                    <h3>Pantalon</h3>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. dicta in rerum porro expedita! Quam, quod a.</p>
-                    <div class="product-price">
-                        <span class="price">6000 DA</span>
-                        <a href="#" class="btn">Ajouter au Panier</a>
-                    </div>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="02.jpg" alt="Tenue Décontractée">
-                </div>
-                <div class="product-info">
-                    <h3>Trousers</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.aliquid earum atque nihil numquam dignissimos vel.</p>
-                    <div class="product-price">
-                        <span class="price">8500 DA</span>
-                        <a href="#" class="btn">Ajouter au Panier</a>
-                    </div>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="03.jpg" alt="Tenue Formelle">
-                </div>
-                <div class="product-info">
-                    <h3>Pantalon noire</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing. Consequatur, rem qui! Odit facilis velit laudantium ullam omnis quibusdam.</p>
-                    <div class="product-price">
-                        <span class="price">4000 DA</span>
-                        <a href="#" class="btn">Ajouter au Panier</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+
+
+
+
+
+  <!-- SHOP BESTSELLERS -->
+<section class="bestsellers">
+  <h2>SHOP BESTSELLERS</h2>
+  <div class="product-grid">
+    <div class="product-card">
+      <span class="badge">SALE</span>
+      <img src="10.jpg" alt="">
+      <h3>Linen Polo Shirt</h3>
+      <p>DA 6,900.00</p>
+    </div>
+    <div class="product-card">
+      <span class="badge">SALE</span>
+      <img src="11.jpg" alt="">
+      <h3>Premium Linen Shorts</h3>
+      <p>DA 5,400.00</p>
+    </div>
+    <div class="product-card">
+      <span class="badge">SALE</span>
+      <img src="12.jpg" alt="">
+      <h3>Urban Cotton Shirt</h3>
+      <p>DA 7,200.00</p>
+    </div>
+    <div class="product-card">
+      <span class="badge">SALE</span>
+      <img src="13.jpeg" alt="">
+      <h3>Knitted Zip Sweater</h3>
+      <p>DA 9,900.00</p>
+    </div>
+  </div>
+</section>
+
+<!-- SHOP BY CATEGORY -->
+<section class="categories">
+  <h2>SHOP BY CATEGORY</h2>
+  <div class="category-grid">
+    <div class="category-card">
+      <img src="21.jpg" alt="">
+      <div class="overlay"><h3>TOPS</h3></div>
+    </div>
+    <div class="category-card">
+      <img src="22.jpg" alt="">
+      <div class="overlay"><h3>BOTTOMS</h3></div>
+    </div>
+    <div class="category-card">
+      <img src="23.jpeg" alt="">
+      <div class="overlay"><h3>FOOTWEAR</h3></div>
+    </div>
+    <div class="category-card">
+      <img src="24.jpg" alt="">
+      <div class="overlay"><h3>ACCESSORIES</h3></div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+<!-- BANNER SECTION -->
+<section class="rigalita-banner">
+  <div class="banner-overlay"></div>
+  <img src="bannerr.jpg" alt="Rigalita Banner" class="banner-bg">
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <!-- Pied de page -->
     <footer>
@@ -968,113 +177,40 @@
         </div>
     </footer>
 
-    <script>
-        // Effet de défilement de l'en-tête
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
 
-        // Menu mobile
-        const hamburger = document.querySelector('.hamburger');
-        const nav = document.querySelector('nav');
 
-        hamburger.addEventListener('click', function() {
-            nav.classList.toggle('active');
-        });
 
-        // Fermer le menu mobile en cliquant sur un lien
-        const navLinks = document.querySelectorAll('nav ul li a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                nav.classList.remove('active');
-            });
-        });
 
-        // Animation au défilement
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
 
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    if (entry.target.classList.contains('about-text')) {
-                        entry.target.style.animation = 'fadeInLeft 1s ease forwards';
-                    } else if (entry.target.classList.contains('about-image')) {
-                        entry.target.style.animation = 'fadeInRight 1s ease forwards';
-                    } else if (entry.target.classList.contains('product-card')) {
-                        entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
-                    }
-                }
-            });
-        }, observerOptions);
 
-        // Observer les éléments pour l'animation
-        document.addEventListener('DOMContentLoaded', function() {
-            const aboutText = document.querySelector('.about-text');
-            const aboutImage = document.querySelector('.about-image');
-            const productCards = document.querySelectorAll('.product-card');
+  <script >
+    // Responsive menu
+const menuToggle = document.getElementById('menu-toggle');
+const navLinks = document.querySelector('.nav-links');
+menuToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('active');
+});
 
-            if (aboutText) observer.observe(aboutText);
-            if (aboutImage) observer.observe(aboutImage);
-            productCards.forEach(card => observer.observe(card));
-        });
+// Countdown simulation
+setInterval(() => {
+  const countdown = document.getElementById('countdown');
+  let now = new Date();
+  let end = new Date("Oct 31, 2025 00:00:00").getTime();
+  let diff = end - now.getTime();
 
-        // Effet de vague sur les boutons
-        const buttons = document.querySelectorAll('.btn');
-        buttons.forEach(button => {
-            button.addEventListener('click', function(e) {
-                const x = e.clientX - e.target.getBoundingClientRect().left;
-                const y = e.clientY - e.target.getBoundingClientRect().top;
-                
-                const ripple = document.createElement('span');
-                ripple.style.left = `${x}px`;
-                ripple.style.top = `${y}px`;
-                this.appendChild(ripple);
-                
-                setTimeout(() => {
-                    ripple.remove();
-                }, 600);
-            });
-        });
-    </script>
+  if (diff <= 0) {
+    countdown.innerHTML = "SALE ENDED";
+    return;
+  }
 
-    <script>
-        // Animation des images au survol
-        document.addEventListener('DOMContentLoaded', function() {
-            const heroImages = document.querySelectorAll('.hero-image');
-            
-            heroImages.forEach(image => {
-                image.addEventListener('mouseenter', function() {
-                    this.style.transform = 'rotate(0deg) scale(1.05)';
-                    this.style.zIndex = '3';
-                });
-                
-                image.addEventListener('mouseleave', function() {
-                    if(this.classList.contains('hero-image-1')) {
-                        this.style.transform = 'rotate(-5deg)';
-                    } else {
-                        this.style.transform = 'rotate(5deg)';
-                    }
-                    this.style.zIndex = '1';
-                });
-            });
-            
-            // Effet de parallaxe subtil au défilement
-            window.addEventListener('scroll', function() {
-                const scrolled = window.pageYOffset;
-                const hero = document.querySelector('.hero');
-                const rate = scrolled * -0.5;
-                
-                hero.style.transform = `translateY(${rate}px)`;
-            });
-        });
-    </script>
+  let days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  let hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  let mins = Math.floor((diff / (1000 * 60)) % 60);
+  let secs = Math.floor((diff / 1000) % 60);
+
+  countdown.innerHTML = `${days}D : ${hours}H : ${mins}M : ${secs}S`;
+}, 1000);
+
+  </script>
 </body>
 </html>
